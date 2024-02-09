@@ -25,15 +25,11 @@ def validate_password(user_input):
 # Input : 0100,0011,1010,1001
 # Output: 1010
 
-def binary_digits(input_string_list):
-    items = []
-    num = [x for x in input_string_list.split(',')]
-    for p in num:
-        x = int(p, 2)
-        print(x)
-        if x % 5 == 0:
-            items.append(p)
-    print(','.join(items))
+def binary_digits(num):
+    x = int(num, 2)
+    if x % 5 == 0:
+        return str(num)
+    return "None"
 
 
 def main():
@@ -45,5 +41,11 @@ def main():
     results = pool.map(validate_password, r.split(","))
     print(', '.join(results))
 
+    pool1 = ThreadPool(4)
+    with open("file_binary.txt", "r") as f:
+        r = f.read()
+
+    results = pool1.map(binary_digits, r.split(","))
+    print(', '.join(results))
 
 main()
